@@ -2,7 +2,7 @@ let express = require('express')
 let app = express()
 let port = 3002
 
-app.get('/api_slack', (req, res) => {
+app.get('/', (req, res) => {
     res.send("Hello Flock")
 })
 
