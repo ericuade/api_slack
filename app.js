@@ -1,6 +1,6 @@
 let express = require('express')
 let app = express()
-let port = 3000
+let port = 3002
 
 app.get('/', (req, res) => {
     res.send("Hello Flock")
