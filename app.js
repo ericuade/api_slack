@@ -1,16 +1,15 @@
-let express = require('express')
-let axios = require('axios')
-let app = express()
-let port = 3002
+const express = require('express');
+const axios = require('axios'); // Corrige el nombre de 'axios'
+const app = express();
+const port = 3002;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post('/api_slack', (req, res) => {
-    console.log('req.body: ', req.body)
-    const { trigger_id } = req.body
+app.post('/api_slack', async (req, res) => { // Añade async para permitir el uso de await dentro de la función
+    console.log('req.body: ', req.body);
+    const { trigger_id } = req.body;
     
-    // Define el payload del modal
     const modalPayload = {
         "type": "modal",
         "callback_id": "soporte_form",
@@ -51,35 +50,30 @@ app.post('/api_slack', (req, res) => {
         ]
     };
 
-    // Utiliza la API de Slack para abrir el modal
     try {
-        async function openModal() {
+        // Se llama a la función directamente y se maneja la respuesta dentro del try-catch
         const response = await axios.post('https://slack.com/api/views.open', JSON.stringify({
             trigger_id: trigger_id,
             view: modalPayload
         }), {
             headers: {
-                //'Authorization': `Bearer xoxb-tu-token-de-bot`,
-                'Authorization': 'xapp-1-A06LR5J4XB3-6687032251511-74649c2f5f7be47717cb4ef2dd1869c16a43b3f9b41bca6b1155b12b658f5233',
+                'Authorization': 'Bearer xoxb-tu-token-de-bot', // Asegúrate de reemplazar 'xoxb-tu-token-de-bot' con tu token real de Bot
                 'Content-Type': 'application/json'
             }
         });
-        }
+
         if (response.data.ok) {
-            res.status(200).send('Hello Flock 200');
+            res.status(200).send('Modal abierto con éxito');
         } else {
-            // Manejo de errores si Slack devuelve un error
             console.error('Error al abrir el modal:', response.data.error);
-            res.status(200).send('No se pudo abrir el modal');
+            res.status(200).send('No se pudo abrir el modal: ' + response.data.error);
         }
     } catch (error) {
         console.error('Error al enviar la solicitud a Slack:', error);
         res.status(500).send('Error al procesar el comando');
     }
-})
-
+});
 
 app.listen(port, () => {
-    console.log(`Slack integration listening on port ${port}`)
-})
-
+    console.log(`Slack integration listening on port ${port}`);
+});
