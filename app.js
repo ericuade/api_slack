@@ -51,6 +51,7 @@ app.post('/api_slack', (req, res) => {
 
     // Utiliza la API de Slack para abrir el modal
     try {
+        async function openModal() {
         const response = await axios.post('https://slack.com/api/views.open', JSON.stringify({
             trigger_id: trigger_id,
             view: modalPayload
@@ -61,7 +62,7 @@ app.post('/api_slack', (req, res) => {
                 'Content-Type': 'application/json'
             }
         });
-
+        }
         if (response.data.ok) {
             res.status(200).send('Hello Flock 200');
         } else {
