@@ -5,9 +5,10 @@ let port = 3002
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.post('/api_slack', (req, res) => {
-    const { trigger_id } = req.body.trigger_id // Extrae el trigger_id de la solicitud de Slack
-    console.log("Recibido TRIGGER ID: ${trigger_id}")
+    console.log('req.body: ', req.body)
+    const { trigger_id } = req.body
     
     // Define el payload del modal
     const modalPayload = {
