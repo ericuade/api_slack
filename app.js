@@ -57,7 +57,7 @@ app.post('/api_slack', async (req, res) => { // Añade async para permitir el us
             view: modalPayload
         }), {
             headers: {
-                'Authorization': 'Bearer xapp-1-A06LR5J4XB3-6698431669238-bf54dab4ae8839d36c20fb4b04bf2281c10a04fe6b7de68993d29db2cc00c1f9', // Asegúrate de reemplazar 'xoxb-tu-token-de-bot' con tu token real de Bot
+                'Authorization': 'Bearer xoxb-1351970980016-6715848183312-rmMx4ohUUiUHDfDlP76K3Rez', // Asegúrate de reemplazar 'xoxb-tu-token-de-bot' con tu token real de Bot
                 'Content-Type': 'application/json'
             }
         });
