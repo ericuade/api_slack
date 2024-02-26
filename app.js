@@ -1,5 +1,5 @@
 let express = require('express')
-let axio = require('axios')
+let axios = require('axios')
 let app = express()
 let port = 3002
 
