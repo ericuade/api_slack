@@ -69,8 +69,8 @@ app.post('/api_slack', async (req, res) => { // Añade async para permitir el us
             res.status(200).send('No se pudo abrir el modal: ' + response.data.error);
         }
     } catch (error) {
-        console.error('Error al enviar la solicitud a Slack:', error);
-        res.status(500).send('Error al procesar el comando');
+        console.error('Error al enviar la solicitud a Slack:', error.message);
+        res.status(500).send('Error al procesar el comando: ' + error.message);
     }
 });
 
